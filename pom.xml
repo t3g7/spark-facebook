@@ -8,6 +8,7 @@
   <name>spark-facebook</name>
   <url>http://maven.apache.org</url>
 
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -44,4 +45,5 @@
     </dependency>
 
   </dependencies>
+
 </project>
