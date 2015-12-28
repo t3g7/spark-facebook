@@ -1,17 +1,17 @@
 package com.t3g7.spark.facebook;
 
+import java.util.Timer;
 
 import facebook4j.Facebook;
+import facebook4j.FacebookFactory;
 
-/**
- * Hello world!
- *
- */
 public class FacebookStreamingApp {
     public static void main( String[] args ) {
-    	// Traduction littérale du scala
-    	Facebook facebook = FacebookUtils.facebookConfig();
+    	Facebook facebook = new FacebookFactory().getInstance();
+    	FacebookUtils.facebookConfig(facebook);
     	
-    	FacebookUtils.createStream();
+    	Timer timer = new Timer();
+    	timer.scheduleAtFixedRate(new Streamer(), 0, 15);
+    	
     }
 }

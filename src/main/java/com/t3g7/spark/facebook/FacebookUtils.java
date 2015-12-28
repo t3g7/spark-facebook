@@ -3,22 +3,20 @@ package com.t3g7.spark.facebook;
 import facebook4j.*;
 import facebook4j.auth.AccessToken;
 
-import java.nio.charset.Charset;
-import java.nio.file.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.*;
 
 public class FacebookUtils {
 
 	static Utils utils = Utils.getInstance();
 
-	static Facebook facebook = new FacebookFactory().getInstance();
-	
-	ArrayList<String> accounts = utils.getLines("/facebookPages.txt");
+	static ArrayList<String> accounts = utils.getLines("/facebookPages.txt");
 
-	public static Facebook facebookConfig() {
+	static Facebook facebook;
+	
+	public static Facebook facebookConfig(Facebook facebookInstance) {
 		// TODO Auto-generated method stub
+		facebook = facebookInstance;
+		
 		String token = utils.getLine("/token.txt");
 
 		facebook.setOAuthAppId("", "");
@@ -37,18 +35,18 @@ public class FacebookUtils {
 		}
 	}
 
-	public static ResponseList<Post> getPosts(String page) throws FacebookException {
-		Reading parameters = new Reading().addParameter("since", utils.lastTimestamp)
-				.fields("from", "message", "created_time", "comments","story_tags");
-		
+	public static ResponseList<Post> getPosts(String page)
+			throws FacebookException {
+		Reading parameters = new Reading().addParameter("since",
+				utils.lastTimestamp).fields("from", "message", "created_time",
+				"comments", "story_tags");
+
 		return facebook.getFeed(page, parameters);
 	}
-	
-	
 
-	public static void createStream() {
+	public static void plop() {
 		// TODO Auto-generated method stub
-
+		System.out.println("plop");
 	}
 
 }

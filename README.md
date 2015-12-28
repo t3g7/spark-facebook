@@ -1,1 +1,2 @@
 # spark-facebook
+mvn package
