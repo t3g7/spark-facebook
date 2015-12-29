@@ -5,6 +5,7 @@ import java.util.TimerTask;
 import java.util.stream.Collectors;
 
 import facebook4j.*;
+import facebook4j.internal.org.json.JSONObject;
 
 public class Streamer extends TimerTask {
 
@@ -23,8 +24,10 @@ public class Streamer extends TimerTask {
 	}
 
 	private void processPosts(ResponseList<Post> posts) {
-		List<Post> results = posts.stream().map(p ->  p)
-				.collect(Collectors.toList());
+		List<Post> results = posts.stream().map(p -> {
+			return p;
+		}).collect(Collectors.toList());
+		
 		System.out.println(results);
 		for (Post post : posts) {
 			// actions

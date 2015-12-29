@@ -11,12 +11,10 @@ public class FacebookUtils {
 
 	static ArrayList<String> accounts = utils.getLines("/facebookPages.txt");
 
-	static Facebook facebook;
+	static Facebook facebook = new FacebookFactory().getInstance();;
 	
-	public static Facebook facebookConfig(Facebook facebookInstance) {
+	public static Facebook facebookConfig() {
 		// TODO Auto-generated method stub
-		facebook = facebookInstance;
-		
 		String token = utils.getLine("/token.txt");
 
 		facebook.setOAuthAppId("", "");

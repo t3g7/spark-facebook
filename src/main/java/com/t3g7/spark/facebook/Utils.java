@@ -37,7 +37,8 @@ public class Utils {
 	}
 	
 	public String getLine (String resource) {
-		InputStreamReader isr = new InputStreamReader(this.getClass().getResourceAsStream(resource));
+//		InputStreamReader isr = new InputStreamReader(this.getClass().getResourceAsStream(resource));
+		InputStreamReader isr = new InputStreamReader(getClass().getResourceAsStream(resource));
 		BufferedReader br = new BufferedReader(isr);
 		
 		String line = "";
@@ -54,6 +55,7 @@ public class Utils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(line);
 		return line;
 	}
 }
