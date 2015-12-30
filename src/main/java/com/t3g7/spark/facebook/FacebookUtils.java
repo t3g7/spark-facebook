@@ -26,7 +26,7 @@ public class FacebookUtils {
 	public static void extendToken() {
 		String token = utils.getLine("/token.txt");
 		try {
-			facebook.extendTokenExpiration(token);
+			facebook.extendTokenExpiration();
 		} catch (FacebookException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
