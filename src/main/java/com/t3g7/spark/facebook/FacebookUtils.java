@@ -12,7 +12,7 @@ public class FacebookUtils {
 	static ArrayList<String> accounts = utils.getLines("/facebookPages.txt");
 
 	static Facebook facebook = new FacebookFactory().getInstance();;
-	
+
 	public static Facebook facebookConfig() {
 		// TODO Auto-generated method stub
 		String token = utils.getLine("/token.txt");
