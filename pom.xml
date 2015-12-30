@@ -52,26 +52,27 @@
       <version>[2.3,)</version>
     </dependency>
 <!--
-    <dependency>
-    	<groupId>org.apache.spark</groupId>
-    	<artifactId>spark-core</artifactId>
-    	<version>1.5.1</version>
-    	<scope>provided</scope>
-    </dependency>
-    
-    <dependency>
-    	<groupId>org.apache.spark</groupId>
-    	<artifactId>spark-streaming</artifactId>
-    	<version>1.5.1</version>
-    	<scope>provided</scope>
-    </dependency>
-    
-    <dependency>
-    	<groupId>org.datastax.spark</groupId>
-    	<artifactId>spark-cassandra-connector</artifactId>
-    	<version>1.5.0-M2</version>
-    </dependency>
   -->
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_2.10</artifactId>
+      <version>1.5.1</version>
+      <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-streaming_2.10</artifactId>
+      <version>1.5.1</version>
+      <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.datastax.spark</groupId>
+      <artifactId>spark-cassandra-connector_2.10</artifactId>
+      <version>1.5.0-M3</version>
+    </dependency>
+    
   </dependencies>
 
 </project>

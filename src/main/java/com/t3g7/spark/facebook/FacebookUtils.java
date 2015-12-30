@@ -24,6 +24,9 @@ public class FacebookUtils {
 	}
 
 	public static void extendToken() {
+		/**
+		 * to fix : error message - Missing client_id parameter. code - 101
+		 */
 		String token = utils.getLine("/token.txt");
 		try {
 			facebook.extendTokenExpiration();

@@ -4,9 +4,10 @@ import java.util.Timer;
 
 public class FacebookStreamingApp {
 	public static void main(String[] args) {
-		new FacebookUtils().facebookConfig();
+		FacebookUtils.facebookConfig();
 
 		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(new Streamer(), 0, 15);
+		// Beware : values below in miliseconds 
+		timer.scheduleAtFixedRate(new Streamer(), 0, 15 * 1000);
 	}
 }
