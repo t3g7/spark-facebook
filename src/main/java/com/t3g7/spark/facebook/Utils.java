@@ -2,10 +2,8 @@ package com.t3g7.spark.facebook;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import com.sun.xml.internal.org.jvnet.fastinfoset.FastInfosetSource;
 
 public class Utils {
 

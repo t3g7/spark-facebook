@@ -7,14 +7,15 @@ import java.util.stream.Collectors;
 import facebook4j.*;
 
 public class Streamer extends TimerTask {
+	FacebookUtils facebookUtils = FacebookUtils.getInstance();
 
 	@Override
 	public void run() {
-//		FacebookUtils.extendToken();
-		
-		for (String account : FacebookUtils.accounts) {
+		// FacebookUtils.extendToken();
+
+		for (String account : facebookUtils.accounts) {
 			try {
-				processPosts(FacebookUtils.getPosts(account));
+				processPosts(facebookUtils.getPosts(account));
 			} catch (FacebookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -28,7 +29,7 @@ public class Streamer extends TimerTask {
 		List<Post> results = posts.stream().map(p -> {
 			return p;
 		}).collect(Collectors.toList());
-		
+
 		System.out.println(results);
 		for (Post post : posts) {
 			

@@ -4,7 +4,9 @@ import java.util.Timer;
 
 public class FacebookStreamingApp {
 	public static void main(String[] args) {
-		FacebookUtils.facebookConfig();
+		FacebookUtils facebookUtils = FacebookUtils.getInstance();
+		
+		facebookUtils.facebookConfig();
 
 		Timer timer = new Timer();
 		// Beware : values below in miliseconds 
