@@ -11,7 +11,6 @@ public class CassandraUtils {
 	 * utils/CassandraSettings.scala
 	 */
 	private CassandraUtils() {
-		// TODO Auto-generated constructor stub
 	}
 
 	private static CassandraUtils INSTANCE = new CassandraUtils();
