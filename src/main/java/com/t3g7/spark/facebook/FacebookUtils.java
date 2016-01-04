@@ -3,7 +3,6 @@ package com.t3g7.spark.facebook;
 import facebook4j.*;
 import facebook4j.auth.AccessToken;
 
-import com.t3g7.spark.facebook.*;
 
 import java.util.ArrayList;
 

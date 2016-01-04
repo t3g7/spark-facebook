@@ -9,7 +9,6 @@ import org.apache.spark.api.java.JavaSparkContext;
 import facebook4j.*;
 
 public class Streamer extends TimerTask {
-	FacebookUtils facebookUtils = new FacebookUtils();
 	JavaSparkContext jsc;
 	
 	public Streamer(JavaSparkContext jsc) {
@@ -21,9 +20,9 @@ public class Streamer extends TimerTask {
 	public void run() {
 		// FacebookUtils.extendToken();
 
-		for (String account : facebookUtils.accounts) {
+		for (String account : FacebookUtils.accounts) {
 			try {
-				processPosts(facebookUtils.getPosts(account));
+				processPosts(FacebookUtils.getPosts(account));
 			} catch (FacebookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
