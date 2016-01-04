@@ -4,10 +4,18 @@ import java.util.List;
 import java.util.TimerTask;
 import java.util.stream.Collectors;
 
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
 import facebook4j.*;
 
 public class Streamer extends TimerTask {
-	FacebookUtils facebookUtils = FacebookUtils.getInstance();
+	FacebookUtils facebookUtils = new FacebookUtils();
+	JavaSparkContext jsc;
+	
+	public Streamer(JavaSparkContext jsc) {
+		// TODO Auto-generated constructor stub
+		this.jsc = jsc;
+	}
 
 	@Override
 	public void run() {
@@ -31,8 +39,7 @@ public class Streamer extends TimerTask {
 		}).collect(Collectors.toList());
 
 		System.out.println(results);
-		for (Post post : posts) {
-			
-		}
+		JavaRDD<Post> postsRDD = jsc.parallelize(results);
+		// TODO : find a way to use the SaveToCassandra function 'cause the import we need cannot be found 
 	}
 }

@@ -3,24 +3,24 @@ package com.t3g7.spark.facebook;
 import java.util.Timer;
 
 import org.apache.spark.SparkConf;
-import org.apache.spark.SparkContext;
+import org.apache.spark.api.java.JavaSparkContext;
 
 public class FacebookStreamingApp {
 	public static void main(String[] args) {
 		CassandraUtils cassandraUtils = CassandraUtils.getInstance();
-		FacebookUtils facebookUtils = FacebookUtils.getInstance();
+		FacebookUtils facebookUtils = new FacebookUtils();
 
 		// Set Spark configuration and context
 		SparkConf conf = new SparkConf().setMaster("local[2]")
 				.setAppName("FacebookStreamingApp")
 				.set("spark.cassandra.connection.host", "localhost");
-		SparkContext sc = new SparkContext(conf);
-
+		JavaSparkContext jsc = new JavaSparkContext(conf);
+		
 		cassandraUtils.setUp(conf);
 		facebookUtils.facebookConfig();
 
 		Timer timer = new Timer();
-		// Beware : values below in miliseconds
-		timer.scheduleAtFixedRate(new Streamer(), 0, 15 * 1000);
+		// Beware : values below in milliseconds
+		timer.scheduleAtFixedRate(new Streamer(jsc), 0, 15 * 1000);
 	}
 }
