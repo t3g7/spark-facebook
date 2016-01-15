@@ -22,7 +22,6 @@ public class CassandraUtils {
 	public void setUp(SparkConf conf) {
 		CassandraConnector connector = CassandraConnector.apply(conf);
 
-		// TODO : Adapt the fields of the table created to the facebook data template
 		try (Session session = connector.openSession()) {
 			session.execute("CREATE KEYSPACE IF NOT EXISTS facebook_streaming WITH REPLICATION = {'class': 'SimpleStrategy', 'replication_factor': 1}");
 			session.execute("CREATE TABLE IF NOT EXISTS facebook_streaming.tweets ("
@@ -33,17 +32,28 @@ public class CassandraUtils {
 					+ "created_at timestamp,"
 					+ "favorite_count int,"
 					+ "retweet_count int,"
-					+ "post_id bigint,"
+					+ "tweet_id bigint,"
 					+ "user_mentions list<text>,"
 					+ "reply_id bigint,"
 					+ "response_time text,"
 					+ "hashtags list<text>,"
 					+ "urls list<text>,"
 					+ "sentiment text,"
-					+ "PRIMARY KEY (body, user_id, post_id, user_screen_name, sentiment))");
+					+ "PRIMARY KEY (body, user_id, tweet_id, user_screen_name, sentiment))");
+			
+			session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.posts(user_id);");
+		    session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.posts(tweet_id);");
+		    session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.posts(sentiment);");
+		    session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.posts(user_screen_name);");
+
 			session.execute("CREATE TABLE IF NOT EXISTS facebook_streaming.freq ("
 					+ "date timestamp,"
 					+ "count counter,"
+					+ "PRIMARY KEY (date))");
+			
+			session.execute("CREATE TABLE IF NOT EXISTS facebook_streaming.trends ("
+					+ "date timestamp,"
+					+ "hashtags map<text, int>,"
 					+ "PRIMARY KEY (date))");
 		}
 	}
