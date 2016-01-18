@@ -26,6 +26,15 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
@@ -49,20 +58,20 @@
       <version>1.5.1</version>
       <scope>provided</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-streaming_2.10</artifactId>
       <version>1.5.1</version>
       <scope>provided</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>com.datastax.spark</groupId>
       <artifactId>spark-cassandra-connector-java_2.10</artifactId>
       <version>1.5.0-M3</version>
     </dependency>
-    
+
   </dependencies>
 
 </project>
