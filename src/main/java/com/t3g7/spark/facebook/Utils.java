@@ -17,10 +17,10 @@ public class Utils {
 		return INSTANCE;
 	}
 
-	Long lastTimestamp = System.currentTimeMillis() / 1000 - 10000;
+	Long lastTimestamp = System.currentTimeMillis() / 1000 - 100000;
 
 	public void setLastTimestamp() {
-		lastTimestamp = System.currentTimeMillis() / 1000 - 10000;
+		lastTimestamp = System.currentTimeMillis() / 1000 - 100000;
 	}
 
 	public ArrayList<String> getLines(String resource) {

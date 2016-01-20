@@ -38,7 +38,7 @@ public class FacebookUtils {
 	public static ResponseList<Post> getPosts(String page) throws FacebookException {
 		Reading parameters = new Reading().addParameter("since",
 				utils.lastTimestamp).fields("from", "message", "created_time",
-				"comments", "story_tags");
+				"comments", "story_tags","likes","shares", "link");
 
 		return facebook.getFeed(page, parameters);
 	}

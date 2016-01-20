@@ -35,7 +35,6 @@ public class Streamer extends TimerTask {
 	}
 
 	private void processPosts(ResponseList<Post> posts) {
-
 		List<CustomPost> results = posts
 				.stream()
 				.map(p -> new CustomPost(p.getMessage(), 
@@ -43,18 +42,19 @@ public class Streamer extends TimerTask {
 						p.getFrom().getName(), 
 						"FR", 
 						p.getCreatedTime(), 
-						p.getLikes().getCount(), // If this doesn't work try p.getLikes().getSummary().getTotalCount();
-						p.getSharesCount(), 
-						Long.parseLong(p.getId()),
-						p.getWithTags(), // A serializer
-						Long.parseLong(p.getComments().get(0).getId()),
+						p.getLikes().size(),
+						p.getSharesCount() == null ? 0 : p.getSharesCount(), 
+						p.getId(),
+						p.getWithTags(), 
+						p.getComments().isEmpty() ? "0" : p.getComments().get(0).getId(),
 						"0", // TODO : Compute response time
 						new ArrayList<String>(p.getStoryTags().keySet()),
+						p.getLink() == null ? "" : p.getLink().toString(),
 						sentimentUtils.detectSentiment(p.getMessage()).toString() // TODO : Compute sentiment
 				)).collect(Collectors.toList());
-
-		System.out.println(results);
+		
 		JavaRDD<CustomPost> postsRDD = jsc.parallelize(results);
+		
 		CassandraJavaUtil.javaFunctions(postsRDD)
 				.writerBuilder("facebook_streaming", "tweets",
 						CassandraJavaUtil.mapToRow(CustomPost.class))
