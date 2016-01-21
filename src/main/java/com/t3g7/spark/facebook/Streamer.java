@@ -37,7 +37,7 @@ public class Streamer extends TimerTask {
 	private void processPosts(ResponseList<Post> posts) {
 		List<CustomPost> results = posts
 				.stream()
-				.map(p -> new CustomPost(p.getMessage(), 
+				.map(p -> new CustomPost(p.getMessage() == null ? "null" : p.getMessage(), 
 						Long.parseLong(p.getFrom().getId()), 
 						p.getFrom().getName(), 
 						"FR", 
@@ -50,7 +50,7 @@ public class Streamer extends TimerTask {
 						"0", // TODO : Compute response time
 						new ArrayList<String>(p.getStoryTags().keySet()),
 						p.getLink() == null ? "" : p.getLink().toString(),
-						sentimentUtils.detectSentiment(p.getMessage()).toString() // TODO : Compute sentiment
+						sentimentUtils.detectSentiment(p.getMessage()).toString() 
 				)).collect(Collectors.toList());
 		
 		JavaRDD<CustomPost> postsRDD = jsc.parallelize(results);
@@ -59,6 +59,7 @@ public class Streamer extends TimerTask {
 				.writerBuilder("facebook_streaming", "tweets",
 						CassandraJavaUtil.mapToRow(CustomPost.class))
 				.saveToCassandra();
+		
 		
 	}
 }

@@ -9,7 +9,6 @@ import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.process.Tokenizer;
 import edu.stanford.nlp.process.TokenizerFactory;
 
-// Make it  a singleton
 public class SentimentAnalysisUtils {
 	private SentimentAnalysisUtils() {
 	}
@@ -24,6 +23,7 @@ public class SentimentAnalysisUtils {
 	Utils utils = Utils.getInstance();
 
 	public ArrayList<String> tokenize(String content, Set<String> stopWords) {
+		System.out.println(content);
 		StringReader stringReader = new StringReader(content);
 		Tokenizer<CoreLabel> tokenizer = tokenizerFactory
 				.getTokenizer(stringReader);
@@ -53,10 +53,15 @@ public class SentimentAnalysisUtils {
 	}
 	
 	public SentimentType detectSentiment (String text) {
+		if (text == null ) {
+			// For posts that contain no text such as sharing
+			return SentimentType.NEUTRAL;
+		}
+		
 		Set<String> posWordsSet = utils.getLinesSet("/wordsets/pos-words.txt");
 		Set<String> negWordsSet = utils.getLinesSet("/wordsets/neg-words.txt");
 		Set<String> stopWordsSet = utils.getLinesSet("/wordsets/stop-words.txt");
-		
+
 		ArrayList <String> tokens = tokenize(text, stopWordsSet);
 		
 		int posWordsWeight = countWeight(tokens, posWordsSet);
