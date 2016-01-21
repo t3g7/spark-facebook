@@ -32,19 +32,19 @@ public class CassandraUtils {
 					+ "created_at timestamp,"
 					+ "favorite_count int,"
 					+ "retweet_count int,"
-					+ "tweet_id bigint,"
+					+ "tweet_id text,"
 					+ "user_mentions list<text>,"
-					+ "reply_id bigint,"
+					+ "reply_id text,"
 					+ "response_time text,"
 					+ "hashtags list<text>,"
 					+ "urls list<text>,"
 					+ "sentiment text,"
 					+ "PRIMARY KEY (body, user_id, tweet_id, user_screen_name, sentiment))");
 			
-			session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.posts(user_id);");
-		    session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.posts(tweet_id);");
-		    session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.posts(sentiment);");
-		    session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.posts(user_screen_name);");
+			session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.tweets(user_id);");
+		    session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.tweets(tweet_id);");
+		    session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.tweets(sentiment);");
+		    session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.tweets(user_screen_name);");
 
 			session.execute("CREATE TABLE IF NOT EXISTS facebook_streaming.freq ("
 					+ "date timestamp,"
