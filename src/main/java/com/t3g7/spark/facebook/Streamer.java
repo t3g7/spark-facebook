@@ -26,7 +26,7 @@ public class Streamer extends TimerTask {
 
 		for (String account : FacebookUtils.accounts) {
 			try {
-				processPosts(FacebookUtils.getPosts(account));
+				processPosts(FacebookUtils.getPosts(account), account);
 			} catch (FacebookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -34,7 +34,7 @@ public class Streamer extends TimerTask {
 		}
 	}
 
-	private void processPosts(ResponseList<Post> posts) {
+	private void processPosts(ResponseList<Post> posts, String account) {
 		List<CustomPost> results = posts
 				.stream()
 				.map(p -> new CustomPost(p.getMessage() == null ? "null" : p.getMessage(), 
@@ -46,8 +46,7 @@ public class Streamer extends TimerTask {
 						p.getSharesCount() == null ? 0 : p.getSharesCount(), 
 						p.getId(),
 						p.getWithTags(), 
-						p.getComments().isEmpty() ? "0" : p.getComments().get(0).getId(),
-						"0", // TODO : Compute response time
+						account,
 						new ArrayList<String>(p.getStoryTags().keySet()),
 						p.getLink() == null ? "" : p.getLink().toString(),
 						sentimentUtils.detectSentiment(p.getMessage()).toString() 

@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import facebook4j.FacebookException;
 import facebook4j.IdNameEntity;
+import facebook4j.Comment;
 
 
 public class CustomPost implements Serializable {
@@ -36,7 +38,7 @@ public class CustomPost implements Serializable {
 
 	public CustomPost(String body, long userId, String userName, String lang,
 			Date createdAt, int likesCount, int sharesCount, String postId,
-			List<IdNameEntity> userMentions, String replyId, String responseTime,
+			List<IdNameEntity> userMentions, String account,
 			List<String> hashtags, String url, String sentiment) {
 		super();
 		this.body = body;
@@ -50,13 +52,28 @@ public class CustomPost implements Serializable {
 		this.userMentions = userMentions.stream()
 				.map(userMention -> userMention.getName())
 				.collect(Collectors.toList());
-		this.replyId = replyId;
-		this.responseTime = responseTime;
 		this.hashtags = hashtags;
 		this.urls = new ArrayList<String>();
 		urls.add(url);
-		this.sentiment = sentiment;
+		this.sentiment = sentiment;	
 		
+		
+		// Response time computation
+		Comment reply = null;
+		try {
+			reply = FacebookUtils.getFirstResponse(postId, "");
+		} catch (FacebookException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (reply != null) {
+			this.replyId = reply.getId();
+			this.responseTime = ResponseTime.getInstance().getResponseTime(createdAt, reply.getCreatedTime());
+		} else {
+			this.replyId = "";
+			this.responseTime = "null";
+		}
+
 	}
 
 	public String getBody() {
