@@ -8,12 +8,13 @@ import java.util.stream.Collectors;
 
 import facebook4j.IdNameEntity;
 
-public class CustomPost implements Serializable{
+
+public class CustomPost implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7503589812001038748L;
-	
+
 	public String body;
 	public long userId;
 	public String userScreenName;
@@ -32,7 +33,7 @@ public class CustomPost implements Serializable{
 	public CustomPost() {
 		
 	}
-	
+
 	public CustomPost(String body, long userId, String userName, String lang,
 			Date createdAt, int likesCount, int sharesCount, String postId,
 			List<IdNameEntity> userMentions, String replyId, String responseTime,
@@ -54,9 +55,10 @@ public class CustomPost implements Serializable{
 		this.hashtags = hashtags;
 		this.urls = new ArrayList<String>();
 		urls.add(url);
-		this.sentiment = sentiment;	
+		this.sentiment = sentiment;
+		
 	}
-	
+
 	public String getBody() {
 		return body;
 	}
@@ -112,4 +114,5 @@ public class CustomPost implements Serializable{
 	public String getSentiment() {
 		return sentiment;
 	}	
+
 }
