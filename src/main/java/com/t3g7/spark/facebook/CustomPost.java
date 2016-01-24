@@ -8,11 +8,13 @@ import java.util.stream.Collectors;
 
 import facebook4j.IdNameEntity;
 
+
 public class CustomPost implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7503589812001038748L;
+
 	public String body;
 	public long userId;
 	public String userScreenName;

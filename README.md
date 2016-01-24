@@ -17,6 +17,11 @@ Copy the dependencies into `target/dependency` with (only if it is the first tim
 
 
 
+Copy the dependencies into `target/dependency` with (only if it is the first time you are building):
+	
+	mvn dependency:copy-dependencies
+	
+
 ### Running the app
 Note: a Cassandra instance must be running.
 From the ```$SPARK_HOME``` folder, run the following:
