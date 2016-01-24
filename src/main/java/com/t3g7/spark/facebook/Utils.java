@@ -2,8 +2,9 @@ package com.t3g7.spark.facebook;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
-
+import java.util.Set;
 
 public class Utils {
 
@@ -16,14 +17,15 @@ public class Utils {
 		return INSTANCE;
 	}
 
-	Long lastTimestamp = System.currentTimeMillis() / 1000 - 10000;
+	Long lastTimestamp = System.currentTimeMillis() / 1000 - 100000;
 
 	public void setLastTimestamp() {
-		lastTimestamp = System.currentTimeMillis() / 1000 - 10000;
+		lastTimestamp = System.currentTimeMillis() / 1000 - 100000;
 	}
 
 	public ArrayList<String> getLines(String resource) {
-		InputStreamReader isr = new InputStreamReader(getClass().getResourceAsStream(resource));
+		InputStreamReader isr = new InputStreamReader(getClass()
+				.getResourceAsStream(resource));
 		Scanner s = new Scanner(isr);
 
 		ArrayList<String> lines = new ArrayList<String>();
@@ -36,12 +38,29 @@ public class Utils {
 	}
 
 	public String getLine(String resource) {
-		InputStreamReader isr = new InputStreamReader(getClass().getResourceAsStream(resource));
+		InputStreamReader isr = new InputStreamReader(getClass()
+				.getResourceAsStream(resource));
 		Scanner s = new Scanner(isr);
-		
+
 		String line = s.next();
 		s.close();
-		
+
 		return line;
+	}
+
+	public Set<String> getLinesSet(String resource) {
+		InputStreamReader isr = new InputStreamReader(getClass()
+				.getResourceAsStream(resource));
+		Scanner s = new Scanner(isr);
+
+		Set<String> lines = new HashSet<String>();
+		
+		while (s.hasNext()) {
+			lines.add(s.next());
+		}
+		
+		s.close();
+
+		return lines;
 	}
 }

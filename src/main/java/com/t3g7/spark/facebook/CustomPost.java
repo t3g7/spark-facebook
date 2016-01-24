@@ -10,12 +10,13 @@ import facebook4j.FacebookException;
 import facebook4j.IdNameEntity;
 import facebook4j.Comment;
 
-public class CustomPost implements Serializable{
+
+public class CustomPost implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7503589812001038748L;
-	
+
 	public String body;
 	public long userId;
 	public String userScreenName;
@@ -34,7 +35,7 @@ public class CustomPost implements Serializable{
 	public CustomPost() {
 		
 	}
-	
+
 	public CustomPost(String body, long userId, String userName, String lang,
 			Date createdAt, int likesCount, int sharesCount, String postId,
 			List<IdNameEntity> userMentions, String account,
@@ -72,8 +73,9 @@ public class CustomPost implements Serializable{
 			this.replyId = "";
 			this.responseTime = "null";
 		}
+
 	}
-	
+
 	public String getBody() {
 		return body;
 	}
@@ -129,4 +131,5 @@ public class CustomPost implements Serializable{
 	public String getSentiment() {
 		return sentiment;
 	}	
+
 }

@@ -43,8 +43,8 @@ public class CassandraUtils {
 			
 			session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.tweets(user_id);");
 		    session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.tweets(tweet_id);");
-		    session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.tweets(sentiment);");
 		    session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.tweets(user_screen_name);");
+		    session.execute("CREATE INDEX IF NOT EXISTS ON facebook_streaming.tweets(sentiment);");
 
 			session.execute("CREATE TABLE IF NOT EXISTS facebook_streaming.freq ("
 					+ "date timestamp,"
